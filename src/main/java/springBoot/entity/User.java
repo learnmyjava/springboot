@@ -2,6 +2,8 @@ package springBoot.entity;
 
 
 public class User {
+	/**用户id*/
+	private String id;
 	/**登录名*/
 	private String username;
 	/**登录密码*/
@@ -43,6 +45,12 @@ public class User {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

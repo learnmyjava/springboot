@@ -1,0 +1,23 @@
+package springBoot.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import springBoot.entity.User;
+import springBoot.mapper.UserInfoMapperDao;
+import springBoot.service.IuserInfoService;
+@Service
+public class IuserInfoServiceImpl implements IuserInfoService{
+
+	@Autowired
+	UserInfoMapperDao userMapper;
+
+	@Override
+	public User getUser(User u) {
+		return userMapper.getUser(u);
+		
+		
+	}
+	
+	
+}

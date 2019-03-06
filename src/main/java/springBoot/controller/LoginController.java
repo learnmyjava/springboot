@@ -3,6 +3,7 @@ package springBoot.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import springBoot.Adapter.WebSecurityAdapter;
 import springBoot.entity.User;
+import springBoot.service.IuserInfoService;
 
 @Controller
 public class LoginController {
+	@Resource
+	@Autowired
+	IuserInfoService userImpl;
 	
 	@RequestMapping("/login")
 	public String login(){
@@ -27,6 +30,8 @@ public class LoginController {
 	
 	@RequestMapping("/loginVerify")
 	public String loginVerify(User user,Model model,HttpSession session){
+		User u =userImpl.getUser(user);
+		
 		if((user.getUsername().equals("admin") && user.getPassword().equals("admin")) ||  user.getUsername().equals("tom") && user.getPassword().equals("tom")){
 			session.setAttribute(WebSecurityAdapter.SESSION_USER_KEY, user);
 			model.addAttribute("user", user);
