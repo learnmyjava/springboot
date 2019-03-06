@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body ms-controller="viewmodel">
+	<div>
+		<input  id="username"  type="hidden" th:value="${user.username}" />
+		<input id="password" type="hidden" th:value="${user.password }"/>
+		欢迎<span   th:text="${user.username }" /> <a href="/logoff">注销</a>
+		
+	</div>
+	
+	<div>
+		年龄:<input type="text" id="age"  name="age" />
+		家庭住址:<input type="text" id="address" name="address" />
+		<input type="button" id="ajaxre" value="ajax提交"/>
+		
+	</div>
+	
+	<div id="showData">
+		<a href="/showList">查询所有用户</a>
+	</div>
+	
+<script type="text/javascript">
+    $("#ajaxre").click(function(){
+    	if($("#age").val()=='' || $("#address").val()==''){
+    		alert("请补全信息!");
+    		return false;
+    	}
+     var datas={
+    			"username":$("#username").val(),
+    			"password":$("#password").val(),
+    			"age":$("#age").val(),
+    			"address":$("#address").val()
+    	} ;
+    	
+    	var data=JSON.stringify(datas);
+    	$.ajax({
+    		url:"/ajaxrequest",
+    		type:"POST",
+    		contentType:"application/json;charset=UTF-8",
+    		data:data,
+    		success:function(user){
+    			
+    			
+    			alert("保存成功!");
+    		},
+    		error:function(e){
+    			alert("保存失败!");
+    		}
+    	}); 
+    	
+    });
+    
+ 
+
+</script>
+</body>
+</html>

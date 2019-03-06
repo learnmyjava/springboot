@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<title>登录页面</title>
+</head>
+<body>
+	<div>
+		<form name="form" accept-charset="UTF-8" action="/loginVerify" method="post" onsubmit="return checkLogin();">
+			<ul style="list-style-type:none">
+				<font color="red"><span th:text="${logintip}"></span></font>
+				<li>
+				用户名:<input type="text" id="username" name="username"   />
+				</li>
+				<li>
+				密 &nbsp;&nbsp;码:<input type="password" id="password"  name="password"  />
+				</li>
+				<li>
+					<input type="submit" value="登录"/> &nbsp;&nbsp;&nbsp;&nbsp; <input type="button"  id="reset" value="重置"/>
+				</li>
+			</ul>
+		</form>
+	</div>
+<script type="text/javascript">
+
+
+
+$("#reset").click(function(){
+	$("#username").val('');
+	$("#password").val('');
+	
+});
+
+function checkLogin(){
+	
+	if($("#username").val()=='' || $("#password").val()==''){
+		alert("用户名或密码不能为空！");
+		return false;
+	}
+	return true;
+	
+}
+
+</script>
+</body>
+</html>

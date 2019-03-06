@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>用户名</td>
+					<td>年龄</td>
+					<td>家庭住址</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${list.size()} eq 0">
+					<td colspan="3">没有用户信息</td>
+				</tr>
+				<tr th:each="u :${list}">
+					<td th:text="${u.username}"></td>
+					<td th:text="${u.age}"></td>
+					<td th:text="${u.address}"></td>
+				</tr>
+			</tbody>
+			
+		</table>
+		
+	</div>
+
+</body>
+</html>
