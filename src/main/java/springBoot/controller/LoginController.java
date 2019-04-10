@@ -37,7 +37,7 @@ public class LoginController {
 		User u =userImpl.getUser(user);
 		
 		if( null != u){
-			LOG.info("username="+u.getUsername());
+			LOG.info("当前登录用  username="+u.getUsername());
 			session.setAttribute(WebSecurityAdapter.SESSION_USER_KEY, user);
 			model.addAttribute("user", user);
 			return "login/jspsuccess";
