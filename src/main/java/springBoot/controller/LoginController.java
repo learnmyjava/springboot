@@ -35,8 +35,9 @@ public class LoginController {
 	@RequestMapping("/loginVerify")
 	public String loginVerify(User user,Model model,HttpSession session){
 		User u =userImpl.getUser(user);
-		LOG.info("username="+u.getUsername());
+		
 		if( null != u){
+			LOG.info("username="+u.getUsername());
 			session.setAttribute(WebSecurityAdapter.SESSION_USER_KEY, user);
 			model.addAttribute("user", user);
 			return "login/jspsuccess";
