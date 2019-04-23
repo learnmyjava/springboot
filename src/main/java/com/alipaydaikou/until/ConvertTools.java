@@ -18,7 +18,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import springBoot.entity.User;
+import net.sf.json.JSONObject;
+
 import com.alipaydaikou.until.ReadXmlUtil;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ConvertTools {
 	/** Mask for bit 0 of a byte. */
@@ -284,17 +289,9 @@ public class ConvertTools {
 			}
 		}
 	}
+
 	/**
-	 * 判断代扣是否成功处理
-	 * @param protocolXML
-	 * @return
-	 */
-	public static Map<String, String>  getReturnMap(String protocolXML){
-		Map<String, String> map = ReadXmlUtil.ReaderXmlForSAX(protocolXML);
-		return map;
-	}
-	/**
-	 * 获取排序的map
+	 * 获取如下格式排序的map
 	 * @param protocolXML
 	 * @return
 	 */
@@ -317,16 +314,16 @@ public class ConvertTools {
 		NGlXyal5dOjUB6znuGdZxypn7V3pJaQVERvgD48AstC8faW+COGttlyJ7vk6W/RwYqNvmApE//E0z6McsKSnRR5zjiWHhgq
 		mScnnFjR0=</sign><sign_type>RSA</sign_type></alipay>*/
 	
-	//getSortMap 获取上述xml 中 所有response <alipay> 下的  key =value
+	//getSortMap 获取上述xml 中 所有response <alipay> 下的  key  value 
 	public static Map<String, String> getSortMap(String protocolXML) {
-		Map<String, String> map = ReadXmlUtil.ReaderXmlForSAX(protocolXML);
-		Map<String, String> mapsign =ReadXmlUtil.getSignMap(map);
+		Map<String, String> map = ReadXmlUtil.ReaderXmlForSAX(protocolXML);//获取到最外层<alipay>下的
+		Map<String, String> mapsign =ReadXmlUtil.getSignMap(map);//getSortMap 获取上述xml 中 所有response <alipay> 下的  key  value 
 		return  sortMapByKey(mapsign);
 		
 	}
 	
 	 /**
-     * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
+     * map排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
      * 
      * @param params 需要排序并参与字符拼接的参数组
      * @return 拼接后字符串
@@ -336,30 +333,22 @@ public class ConvertTools {
         
         List<String> keys = new ArrayList<String>(params.keySet());
         Collections.sort(keys);
-        
         String prestr = "";
-        
-        for (int i = 0; i < keys.size(); i++)
-        {
+        for (int i = 0; i < keys.size(); i++){
             String key = keys.get(i);
             String value = params.get(key);
             
-            if (i == keys.size() - 1)
-            {// 拼接时，不包括最后一个&字符
+            if (i == keys.size() - 1){// 拼接时，不包括最后一个&字符
                 prestr = prestr + key + "=" + value;
             }
-            else
-            {
+            else{
                 prestr = prestr + key + "=" + value + "&";
             }
         }
-        
-//        log.info("待签名参数:" + prestr);
         return prestr;
     }
     
     
-	
 	
 	/**
 	 * map 排序
@@ -411,4 +400,56 @@ public class ConvertTools {
 		Long f2 = Long.valueOf(String.valueOf(f));
 		return f2;
 	}
+	
+/*	{
+	    "alipay_trade_query_response": {
+	        "code": "10000",
+	        "msg": "Success",
+	        "fund_bill_list": [
+	            {
+	                "fund_channel": "ALIPAYACCOUNT",
+	                "amount": 10,
+	                "real_amount": 11.21
+	            }
+	        ],
+	        "alipay_sub_merchant_id": "2088301372182171"
+	    },
+	    "sign": "ERITJKEIJKJHKKKKKKKHJEREEEEEEEEEEE"
+	}*/
+	/**
+	 * 解析如上格式json串
+	 */
+	public void analyzeJsonString(){
+		String response = "";//如上格式json串
+		JSONObject jsonObject = JSONObject.fromObject(response); // 转换成JSONObject对象
+        String alipay_trade_query_response = jsonObject.getString("alipay_trade_query_response");
+        String sign = jsonObject.getString("sign");
+		Map<String, String> respmap = JSONObject.fromObject(alipay_trade_query_response);
+		String code = respmap.get("code");
+		String msg = respmap.get("msg");
+		
+	}
+	
+	
+	/*<xml>
+	   <username><![CDATA[SUCCESS]]></return_code>
+	   <address><![CDATA[OK]]></return_msg>
+	   <password><![CDATA[wx2421b1c4370ec43b]]></appid>
+	</xml> */
+	
+	/**
+	 * 解析如上格式xml
+	 */
+	public void analyzeXml(){
+		String response = "";//如上格式xml
+		User user = (User) getObjectFromXML(response, User.class);
+	}
+	
+	
+	 public static Object getObjectFromXML(String xml, Class tClass){
+	    XStream xStreamForResponseData = new XStream(new DomDriver());
+	    xStreamForResponseData.alias("xml", tClass);
+	    xStreamForResponseData.ignoreUnknownElements();
+	    return xStreamForResponseData.fromXML(xml);
+	  }
 }
