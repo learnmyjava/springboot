@@ -17,7 +17,6 @@ public class MainTest {
        String s = new String("thisisoriadata中午");  //含有中文情况下 如下两个md5的结果不一样
        System.out.println("原始：" + s);  
        System.out.println("MD5后：" + MD5Util.string2MD5(s));  
-       System.out.println("MD5后：" + MD5Util.MD5Encode(s));  
 
        String decodeStr = MD5Util.convertMD5(s);
        System.out.println("加密的：" + decodeStr); 
