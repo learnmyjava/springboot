@@ -10,7 +10,11 @@ import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.Cipher;
-
+/**
+ * 签名
+ * @author lihonghui
+ *
+ */
 public class RSA {
 	public static final String SIGN_ALGORITHMS = "SHA1WithRSA";
 	public static final String SIGN_ALGORITHMS_256 = "SHA256WithRSA";
