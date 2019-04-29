@@ -1,4 +1,4 @@
-package com.rsa.encodeanddecode;  
+package com.rsa.encode.anddecode;  
   
 public final class Base64 {  
   

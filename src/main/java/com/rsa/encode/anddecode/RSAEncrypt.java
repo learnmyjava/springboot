@@ -1,4 +1,4 @@
-package com.rsa.encodeanddecode;  
+package com.rsa.encode.anddecode;  
   
 import java.io.BufferedReader;  
 import java.io.BufferedWriter;  
