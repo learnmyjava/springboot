@@ -14,7 +14,7 @@ public class MainTest {
 	
     public static void main(String args[]) { 
     	//加解密
-       String s = new String("thisisoriadata中午");  //含有中文情况下 如下两个md5的结果不一样
+       String s = new String("加密原文");  //含有中文情况下 如下两个md5的结果不一样
        System.out.println("原始：" + s);  
        System.out.println("MD5后：" + MD5Util.string2MD5(s));  
 

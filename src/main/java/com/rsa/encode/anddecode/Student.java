@@ -46,6 +46,11 @@ public class Student {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", adress=" + adress
+				+ ", age=" + age + ", sex=" + sex + ", tel=" + tel + "]";
+	}
 	
 	
 	

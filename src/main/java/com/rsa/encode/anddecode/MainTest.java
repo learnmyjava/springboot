@@ -49,7 +49,7 @@ public class MainTest {
         System.out.println("签名串："+signstr);  
           
         System.out.println("---------------公钥校验签名------------------");  
-        System.out.println("签名原串："+content);  
+        System.out.println("签名原串："+content); //接收端按照升降规则组成待验签串 
         System.out.println("签名串："+signstr);  
         System.out.println("验签结果："+RSASignature.verify(content, signstr, RSAEncrypt.loadPublicKeyByFile(filepath)));  
         
