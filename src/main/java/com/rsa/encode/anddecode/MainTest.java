@@ -4,7 +4,7 @@ package com.rsa.encode.anddecode;
 public class MainTest {  
   
     public static void main(String[] args) throws Exception {  
-        String filepath="F:/RSAkey-produce/";  
+        String filepath="F:/juhe/";  
   
       RSAEncrypt.genKeyPair(filepath);  
           
@@ -21,7 +21,7 @@ public class MainTest {
         System.out.println("密文："+cipher);  
         System.out.println("解密："+restr);  */
          
-        System.out.println("--------------私钥加密公钥解密过程-------------------");  
+       /* System.out.println("--------------私钥加密公钥解密过程-------------------");  
         String plainText="这是测试原_私钥加密公钥解密";  
         //私钥加密过程  
         byte[] cipherData=RSAEncrypt.encrypt(RSAEncrypt.loadPrivateKeyByStr(RSAEncrypt.loadPrivateKeyByFile(filepath)),plainText.getBytes());  
@@ -52,7 +52,7 @@ public class MainTest {
         System.out.println("签名原串："+content); //接收端按照升降规则组成待验签串 
         System.out.println("签名串："+signstr);  
         System.out.println("验签结果："+RSASignature.verify(content, signstr, RSAEncrypt.loadPublicKeyByFile(filepath)));  
-        
+        */
         
        
           
