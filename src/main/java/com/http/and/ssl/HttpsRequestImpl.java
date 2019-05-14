@@ -37,7 +37,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
 
-public class HttpsRequestImpl implements IServiceRequest {
+public class HttpsRequestImpl  {
 
 	private static final Logger LOG = LoggerFactory
 			.getLogger(HttpsRequestImpl.class);
@@ -121,7 +121,7 @@ public class HttpsRequestImpl implements IServiceRequest {
 	 * @throws KeyManagementException
 	 */
 	@SuppressWarnings("rawtypes")
-	/*@Override
+	
 	public String sendPost(String url, Object xmlObj, Class clazz)
 			throws IOException, KeyStoreException, UnrecoverableKeyException,
 			NoSuchAlgorithmException, KeyManagementException {
@@ -175,7 +175,7 @@ public class HttpsRequestImpl implements IServiceRequest {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes", "finally" })
-	@Override
+	
 	public String sendPostXinlian(String url, Map<String, Object> map)
 			throws ClientProtocolException, IOException,
 			UnrecoverableKeyException, KeyManagementException,
@@ -213,7 +213,7 @@ public class HttpsRequestImpl implements IServiceRequest {
 	}
 	
 	
-	*//**
+	/**
 	 * 通过Https往API post xml数据
 	 *
 	 * @param url
@@ -226,9 +226,8 @@ public class HttpsRequestImpl implements IServiceRequest {
 	 * @throws UnrecoverableKeyException
 	 * @throws NoSuchAlgorithmException
 	 * @throws KeyManagementException
-	 *//*
-	@SuppressWarnings("rawtypes")
-	@Override
+	 */
+	
 	public String sendPostEtc(String url,  String jsonObject)
 			throws IOException, KeyStoreException, UnrecoverableKeyException,
 			NoSuchAlgorithmException, KeyManagementException,Exception {
@@ -243,18 +242,19 @@ public class HttpsRequestImpl implements IServiceRequest {
 		try {
 			LOG.info("请求数据："+jsonObject);
 			httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
-			XlDesTools des = new XlDesTools(AppCode.XL_ETC_KEY);
+			/*XlDesTools des = new XlDesTools(AppCode.XL_ETC_KEY);
 		    String encryptString = "message="+des.encrypt(jsonObject);
 		    LOG.info("请求加密数据："+encryptString);
-		    StringEntity postEntity = new StringEntity(encryptString, "UTF-8");
+		    StringEntity postEntity = new StringEntity(encryptString, "UTF-8");*/
+			 StringEntity postEntity = new StringEntity(jsonObject, "UTF-8");
 			httpPost.setEntity(postEntity);
 
 			CloseableHttpResponse response = httpClient.execute(httpPost);
 			try {
 				HttpEntity entity = response.getEntity();
 				result = EntityUtils.toString(entity, "UTF-8");
-				decryptResult = des.decrypt(result);
-				LOG.info("返回解密数据："+decryptResult);
+			/*	decryptResult = des.decrypt(result);
+				LOG.info("返回解密数据："+decryptResult);*/
 			} finally {
 				response.close();
 			}
@@ -266,11 +266,8 @@ public class HttpsRequestImpl implements IServiceRequest {
 		}
 	}
 	
-	void main(){
-		
-	}
-
-	@Override
+	
+	
 	public String dkreqest(Map<String, String> sParaTemp, String key,
 			String sign_type) throws Exception {
 		
@@ -278,24 +275,83 @@ public class HttpsRequestImpl implements IServiceRequest {
 
 	}
 
-	@Override
+	
 	public String dkQuryreq(Map<String, String> sParaTemp, String key,
 			String sign_type) throws Exception {
 		return AlipayDaiKouQuery.buildRequestNoCert(sParaTemp, key, sign_type);
 	}
 
-	@Override
-	public String alipayReqest(Map<String, String> sParaTemp, String key,String sign_type) throws Exception {
+	/**
+	 * 商户对账
+	 * @param url
+	 * @param jsonObject
+	 * @return
+	 * @throws IOException
+	 * @throws KeyStoreException
+	 * @throws UnrecoverableKeyException
+	 * @throws NoSuchAlgorithmException
+	 * @throws KeyManagementException
+	 * @throws Exception
+	 */
+	public static  String sendMerduizhang(String url,  String jsonObject)
+			throws IOException, KeyStoreException, UnrecoverableKeyException,
+			NoSuchAlgorithmException, KeyManagementException,Exception {
 		
-		return  AlipaySubmit.buildRequestNoCert(sParaTemp, key,sign_type);
+		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+		// Increase max total connection to 200
+		cm.setMaxTotal(200);
+		// Increase default max connection per route to 20
+		cm.setDefaultMaxPerRoute(200);
 
+		CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(cm).build();
+
+		// 根据默认超时限制初始化requestConfig
+		RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(60000)
+				.setConnectTimeout(30000).build();
+		
+		
+		
+		
+		String result = null;
+		HttpPost httpPost = new HttpPost(url);
+		// 设置请求器的配置
+		httpPost.setConfig(requestConfig);
+		try {
+			LOG.info("请求数据："+jsonObject);
+			httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+			StringEntity postEntity = new StringEntity(jsonObject, "UTF-8");
+			httpPost.setEntity(postEntity);
+
+			CloseableHttpResponse response = httpClient.execute(httpPost);
+			try {
+				HttpEntity entity = response.getEntity();
+				result = EntityUtils.toString(entity, "UTF-8");
+				LOG.info("响应数据："+result);
+			} finally {
+				response.close();
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} finally {
+			httpPost.abort();
+			return result;
+		}
 	}
-*/
-	@Override
-	public String sendPost(String api_url, Object xmlObj)
-			throws UnrecoverableKeyException, KeyManagementException,
-			NoSuchAlgorithmException, KeyStoreException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	public static void main(String[] args) {
+		String url = "";
+		String str = "";
+		String sign = "";
+		
+		String requestStr = str+"&"+"sign="+sign;
+		
+		try {
+			String responsestr = sendMerduizhang(url,requestStr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
 }
