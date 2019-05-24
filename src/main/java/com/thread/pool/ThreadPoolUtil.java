@@ -24,8 +24,8 @@ public class ThreadPoolUtil {
 	public void testcachedThreadPool(){
 		
 		ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-		for (int i = 0; i <10; i++) {
-			
+		for (int i = 0; i <100; i++) {
+			 int ss=100;
 			cachedThreadPool.execute(new DoSaveJob(i));
 		}
 	}	
