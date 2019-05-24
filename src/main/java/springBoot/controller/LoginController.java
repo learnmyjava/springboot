@@ -75,14 +75,20 @@ public class LoginController {
 			User u4 =new User("roles","roles",19,"上海");*/
 			User u5 =new User("jack","jack",25,"江苏南京");
 			User u6 =new User("roles","roles",19,"上海");
+<<<<<<< HEAD
 			User u7 =new User("roles","roles",19,"上海");
 			User u8 =new User("roles","roles",19,"上海");
+=======
+>>>>>>> branch 'master' of https://github.com/learnmyjava/SpringBoot.git
 			list.add(u1);
 			list.add(u2);
 			list.add(u5);
 			list.add(u6);
+<<<<<<< HEAD
 			list.add(u7);
 			list.add(u8);
+=======
+>>>>>>> branch 'master' of https://github.com/learnmyjava/SpringBoot.git
 			list.add(u);
 		}
 	
