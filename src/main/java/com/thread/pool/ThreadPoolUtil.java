@@ -22,9 +22,9 @@ public class ThreadPoolUtil {
 	 */
 	@Test
 	public void testcachedThreadPool(){
-		int sss =988;
+		
 		ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-		for (int i = 0; i <501; i++) {
+		for (int i = 0; i <10; i++) {
 			
 			cachedThreadPool.execute(new DoSaveJob(i));
 		}
@@ -46,7 +46,7 @@ public class ThreadPoolUtil {
 		poolThread.setKeepAliveSeconds(300);//允许线程空闲的时间
 		poolThread.setRejectedExecutionHandler(new RejectedExenHandler());//对于拒绝task的处理策略
 		
-		for (int i = 0; i < 54; i++) {
+		for (int i = 0; i < 10; i++) {
 			poolThread.execute(new DoSaveJob(i));
 		}
 		
