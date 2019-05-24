@@ -71,6 +71,8 @@ public class LoginController {
 		if(u.getUsername().equals("admin")){
 			User u1 =new User("tom","tom",12,"山东济南");
 			User u2 =new User("marry","marry",32,"安徽合肥");
+			User u3 =new User("jack","jack",25,"江苏南京");
+			User u4 =new User("roles","roles",19,"上海");
 			
 			User u5 =new User("jack","jack",25,"江苏南京");	
 		
@@ -80,10 +82,11 @@ public class LoginController {
 			
 			list.add(u1);
 			list.add(u2);
-			
+			list.add(u3);
+			list.add(u4);
+
 			list.add(u5);
 			
-		
 			
 			list.add(u);
 		}
