@@ -23,6 +23,8 @@ public class TestEeayexcel {
 	public void testExcel() {
 		
 		try {
+			int i =0;
+			int aa=100;
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
 		OutputStream out = new FileOutputStream("D:/学习资料/"+df.format(new Date())+".xlsx");
 		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
@@ -30,12 +32,12 @@ public class TestEeayexcel {
 		sheet.setSheetName("sheet1");
 		List<TerminalTransBean> data = new ArrayList();
 		TerminalTransBean bean =new TerminalTransBean();
-		bean.setAddress("济南历下");
+		bean.setAddress("中国安徽合肥");
 		bean.setReturnCount(9);
 		
 		data.add(bean);
 		TerminalTransBean bean1 =new TerminalTransBean();
-		bean1.setAddress("济南高新区");
+		bean1.setAddress("济南高新区某某街道");
 		bean1.setReturnCount(3);
 		data.add(bean1);
 		writer.write(data, sheet);
