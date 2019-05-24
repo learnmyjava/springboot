@@ -74,8 +74,8 @@ public class LoginController {
 			User u3 =new User("jack","jack",25,"江苏南京");
 			User u4 =new User("roles","roles",19,"上海");
 			
-			//User u5 =new User("jack","jack",25,"江苏南京");	
-		
+			User u5 =new User("jack","jack",25,"江苏南京");	
+			User u7 =new User("jack","jack",25,"江苏南京");	
 			User u6 =new User("roles","roles",19,"上海");
 		
 			
@@ -87,7 +87,7 @@ public class LoginController {
 
 			//list.add(u5);
 			list.add(u6);
-			
+			list.add(u7);
 			
 			list.add(u);
 		}
