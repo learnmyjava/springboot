@@ -71,12 +71,22 @@ public class LoginController {
 		if(u.getUsername().equals("admin")){
 			User u1 =new User("tom","tom",12,"山东济南");
 			User u2 =new User("marry","marry",32,"安徽合肥");
+			/*User u3 =new User("jack","jack",25,"江苏南京");
+			User u4 =new User("roles","roles",19,"上海");*/
+			User u5 =new User("jack","jack",25,"江苏南京");
+			User u6 =new User("roles","roles",19,"上海");
+		/*	User u7 =new User("roles","roles",19,"上海");
+			User u8 =new User("roles","roles",19,"上海");*/
 			User u3 =new User("jack","jack",25,"江苏苏州");
 			User u4 =new User("roles","roles",19,"上海");
 			
 			
 			list.add(u1);
 			list.add(u2);
+			list.add(u5);
+			list.add(u6);
+			/*list.add(u7);
+			list.add(u8);*/
 			list.add(u3);
 			list.add(u4);
 			list.add(u);
