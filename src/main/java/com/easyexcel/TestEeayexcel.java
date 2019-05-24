@@ -23,6 +23,8 @@ public class TestEeayexcel {
 	public void testExcel() {
 		
 		try {
+			int i =0;
+			int aa=100;
 		 SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
 		OutputStream out = new FileOutputStream("D:/学习资料/"+df.format(new Date())+".xlsx");
 		ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
