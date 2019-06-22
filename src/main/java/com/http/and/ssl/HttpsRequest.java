@@ -30,7 +30,7 @@ import java.security.cert.CertificateException;
  * Date: 2014/10/29
  * Time: 14:36
  */
-public class HttpsRequest implements IServiceRequest{
+public class HttpsRequest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HttpsRequest.class);
 	
