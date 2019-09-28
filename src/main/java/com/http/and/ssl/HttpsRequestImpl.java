@@ -1,5 +1,8 @@
 package com.http.and.ssl;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
+
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.security.KeyManagementException;
@@ -27,9 +30,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alipaydaikou.until.AlipayDaiKouQuery;
 import com.alipaydaikou.until.AlipayDaiKouSubmit;
@@ -56,7 +61,8 @@ public class HttpsRequestImpl  {
 
 	// HTTP请求器
 	private CloseableHttpClient httpClient = null;
-
+	@Autowired
+	private  MeterRegistry registry;
 	public HttpsRequestImpl() throws UnrecoverableKeyException,
 			KeyManagementException, NoSuchAlgorithmException,
 			KeyStoreException, IOException {
@@ -338,7 +344,57 @@ public class HttpsRequestImpl  {
 		}
 	}
 	
-	
+	/**
+	 * httppost请求(用于key-value格式的参数) 请求银行 监控url的响应时间
+	 * @param url
+	 * @param params
+	 * @return
+	 * @throws IOException
+	 * @throws NoSuchAlgorithmException
+	 * @throws KeyStoreException
+	 * @throws KeyManagementException
+	 * @throws UnrecoverableKeyException
+	 */
+	public  String PostMapMertics(String url, Map params) throws UnrecoverableKeyException, KeyManagementException,
+			KeyStoreException, NoSuchAlgorithmException, IOException{
+		if (!hasInit) {
+			init();
+		}
+		String result = null;
+		HttpPost httpPost = new HttpPost(url);
+		// 设置请求器的配置
+		httpPost.setConfig(requestConfig);
+		try {
+			//设置参数
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+			for (Iterator iter = params.keySet().iterator(); iter.hasNext();) {
+				String name = (String) iter.next();
+				String value = String.valueOf(params.get(name));
+				nvps.add(new BasicNameValuePair(name, value));
+
+			}
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps,HTTP.UTF_8));
+			Timer.Sample sample =null /*= Timer.start(registry)*/;
+			CloseableHttpResponse response = httpClient.execute(httpPost);
+			try {
+				HttpEntity entity = response.getEntity();
+				String statusCode = String.valueOf(response.getStatusLine().getStatusCode());
+				sample.stop(registry.timer("http.client.requests","uri",url,"method", "POST", "status", statusCode));
+				if(response.getStatusLine().getStatusCode() ==200 && entity !=null){
+					result = EntityUtils.toString(entity, "UTF-8");
+				}
+			} finally {
+				response.close();
+
+			}
+		}  catch (ParseException e) {
+			e.printStackTrace();
+		} finally {
+			httpPost.abort();
+			return result;
+		}
+	}
+
 	public static void main(String[] args) {
 		String url = "";
 		String str = "";
