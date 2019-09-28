@@ -1,35 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-  	<property name="LOG_HOME" value="${APP_LOG_BASE}/springboot" />
-  	 
+<!--   	<property name="LOG_HOME" value="${APP_LOG_BASE}/log"/>
+ -->  	
+  	<property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+  	 <!-- 控制台打印日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <target>System.out</target>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %X{SystemTraceId} %-5level %logger{36} - %msg%n</pattern>
-            <charset>UTF-8</charset>
+  			<pattern>${LOG_PATTERN}</pattern>
+ 			<charset>UTF-8</charset>
       	</encoder>
-    </appender>        
-    <appender name="DEFAULT_INFO_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">  <!-- 滚动记录文件 --> 
+    </appender>      
+      
+    <!-- 滚动记录info级别日志文件 --> 
+    <appender name="DEFAULT_INFO_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    	<!-- 过滤error日志 -->
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+    		<level>ERROR</level>
+    		<onMatch>DENY</onMatch>  <!-- 如果命中就禁止这条日志 -->
+	        <onMismatch>ACCEPT</onMismatch>  <!-- 如果没有命中就使用这条规则 -->
+    	</filter>
+    	<!-- 日志输出位置及命名规则-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>log/info/springboot.%d{yyyy-MM-dd-HH}.%i.log</FileNamePattern>
+            <MaxHistory>90</MaxHistory><!-- 保存近90个小时的文件 -->
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize><!-- 文件大小100M, 超出使用i 索引 默认 0 -->
+			</timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>   
+        <!-- 日志输出的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+ 			<pattern>${LOG_PATTERN}</pattern>
+ 			<charset>UTF-8</charset>
+		</encoder>
+    </appender>    
+    
+    
+     <!-- 滚动记录error级别日志文件 --> 
+    <appender name="DEFAULT_ERROR_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+    		<level>ERROR</level>
+    	</filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名  按照每小时生生成文件-->
-            <FileNamePattern>${LOG_HOME}/springboot.log.%d{yyyy-MM-dd-HH}.%i.log</FileNamePattern>
+            <FileNamePattern>log/error/springboot.%d{yyyy-MM-dd-HH}.%i.log</FileNamePattern>
             <MaxHistory>90</MaxHistory><!-- 保存近90个小时的文件 -->
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>100MB</maxFileSize><!-- 文件大小100M, 超出使用i 索引 默认 0 -->
 			</timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>   
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-			<charset>UTF-8</charset>
+ 				<pattern>${LOG_PATTERN}</pattern>
+ 				<charset>UTF-8</charset>
 		</encoder>
     </appender>    
-    <!-- 打印错误日志 -->
-    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
-        <target>System.err</target>
-      	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-        	<pattern>%d{HH:mm:ss.SSS} [%thread] %X{SystemTraceId} %-5level %logger{36} - %msg%n</pattern>
-    	</encoder>
-    </appender>
+    
     
    <!--  <logger name="java.sql.Connection">
 		<level value="DEBUG" />
@@ -48,5 +73,6 @@
         <level value="INFO" />
         <appender-ref ref="STDOUT" />
         <appender-ref ref="DEFAULT_INFO_FILE" />
+        <appender-ref ref="DEFAULT_ERROR_FILE" />
     </root>
 </configuration>
