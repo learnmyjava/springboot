@@ -22,7 +22,7 @@ public class RedisController {
 	@RequestMapping("/getData")
 	private String getData(){
 		
-		String name = (String) redisService.get("name");
+		String name = (String) redisService.get("address");
 		LOG.info("获取参数="+name);
 		return name;
 	}
