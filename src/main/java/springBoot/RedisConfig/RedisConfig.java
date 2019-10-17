@@ -74,7 +74,6 @@ public class RedisConfig {
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
         Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
 
-        System.out.println("==============obj:"+Object.class.getName());
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
