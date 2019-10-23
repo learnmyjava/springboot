@@ -58,8 +58,8 @@ public class RedisService {
 	//list有序可重复
 	public List setlist(String key){
 		//单个存入
-		for (int i = 0; i < 10; i++) {
-			redisTemplate.opsForList().rightPush(key, String.valueOf(i++)+"个");
+		for (int i = 0; i <= 2; i++) {
+			redisTemplate.opsForList().rightPush(key, String.valueOf(i+1)+"个");
 			
 		}
 		List list = redisTemplate.opsForList().range(key, 0, -1);//全部读取
@@ -70,13 +70,30 @@ public class RedisService {
 		liststring.add("b2");
 		liststring.add("b3");
 		
+		List liststring1 = new ArrayList();
+		liststring1.add("a1");
+		liststring1.add("a2");
+		liststring1.add("a3");
+		
+		
+		
+		redisTemplate.opsForList().rightPush("rightlist", liststring1);
 		redisTemplate.opsForList().rightPush("rightlist", liststring);
+		
+		
+		redisTemplate.opsForList().leftPush("leftlist", liststring1);
 		redisTemplate.opsForList().leftPush("leftlist", liststring);
 		
-		List list2 = (List) redisTemplate.opsForList().rightPop("rightlist");//读取并删除
+		
+		List rightlist = redisTemplate.opsForList().range("rightlist", 0, -1);//全部读取 ===》[[a1, a2, a3], [b1, b2, b3]]
+		List leftlist = redisTemplate.opsForList().range("leftlist", 0, -1);//全部读取》[[b1, b2, b3],[a1, a2, a3] ]
 		
 		
-		List list3= (List) redisTemplate.opsForList().leftPop("leftlist") ;//读取并删除
+
+		List list2 = (List) redisTemplate.opsForList().rightPop("rightlist");//全部读取并从缓存删除  list2=[b1, b2, b3] ,rightlist 还剩下[a1, a2, a3]
+		List list3= (List) redisTemplate.opsForList().leftPop("leftlist") ;//全部读取并从缓存删除 list3=[b1, b2, b3] ,leftlist 还剩下[a1, a2, a3]
+		
+		
 		return null;
 	}
 	
@@ -111,7 +128,7 @@ public class RedisService {
 		
 	}
 	
-	//VO
+	//VOList
 	public void setObject(){
 		
 		List<User> users = new ArrayList<User>();
@@ -130,6 +147,19 @@ public class RedisService {
 		
 	}
 	
+	
+	//VO
+	/**
+	 * 单个对象
+	 */
+	public void setsingleObject(){
+		
+		User u1 = new  User("lili","lilipass",45,"山东");
+		redisTemplate.opsForValue().set("user1", u1);
+		User returnUsers =  (User) redisTemplate.opsForValue().get("user1");
+		
+		
+	}
 	
 	
 }

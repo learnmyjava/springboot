@@ -70,4 +70,9 @@ public class RedisController {
 	private void setobject(){
 		redisService.setObject();
 	}
+	
+	@RequestMapping("/setVo")
+	private void setVo(){
+		redisService.setsingleObject();
+	}
 }
