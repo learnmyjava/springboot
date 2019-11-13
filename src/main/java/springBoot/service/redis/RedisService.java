@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import redis.clients.jedis.JedisCluster;
 import springBoot.entity.User;
 
 
@@ -28,6 +29,8 @@ public class RedisService {
 	private static final Logger LOG = LoggerFactory.getLogger(RedisService.class);
 	@Autowired
 	private RedisTemplate redisTemplate;
+	@Autowired
+	JedisCluster jedisCluster;
 	/**
 	 * 写入缓存
 	 * @param key
@@ -160,6 +163,8 @@ public class RedisService {
 		
 		
 	}
+	
+	
 	
 	
 }
