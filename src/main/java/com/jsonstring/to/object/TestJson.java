@@ -2,17 +2,16 @@ package com.jsonstring.to.object;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
 import sun.misc.BASE64Decoder;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 
 /**
@@ -22,7 +21,7 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class TestJson {
 	/**
-	 * 多属性且包含list jso转换 object
+	 * 多属性且包含list json转换 java对象或者map
 	 * {
 "BODY":
 {"DETAIL":[{"RETMSG":"�ɹ�","NOTE":"","CARNO":"³B11133","ACTAMT":"1","AMOUNT":"1","RETCODE":"002","SIGNNO":"1000000000000010156","ORDERNO":"19062016750319"},
@@ -45,32 +44,43 @@ public class TestJson {
 		String responseStr = new String(decoder.decodeBuffer(str),"UTF-8");//明文
 
 		
-		BackICBCBatchDKRequest respVo = JSONObject.parseObject(responseStr, BackICBCBatchDKRequest.class);
+		/*	BackICBCBatchDKRequest respVo = JSONObject.parseObject(responseStr, BackICBCBatchDKRequest.class);
 		
 		List<ICBCBatchDKDetail> detailList = new ArrayList<ICBCBatchDKDetail>();
-		/*List<String> s= respVo.getBODY().getDETAIL();
+		List<String> s= respVo.getBODY().getDETAIL();
     	for (int i = 0; i < s.size(); i++) {
 			String string = s.get(i);
 			ICBCBatchDKDetail detail = JSONObject.parseObject(string, ICBCBatchDKDetail.class);
 			detailList.add(detail);//获取到list方法1
-		}*/
+		}
+    	*/
     	
-    	
-    	//： ICBCBatchDKBody.java  如此定义  private List<ICBCBatchDKDetail>  DETAIL;
+    	//to ICBCBatchDKBody.java  如此定义  private List<ICBCBatchDKDetail>  DETAIL;
     	/*BackICBCBatchDKRequest respVo = JSONObject.parseObject(responseStr, BackICBCBatchDKRequest.class);
     	net.sf.json.JSONObject r1 = net.sf.json.JSONObject.fromObject(responseStr);
 		net.sf.json.JSONObject r2 = net.sf.json.JSONObject.fromObject(r1.getString("BODY"));
 		List<ICBCBatchDKDetail> details = JSONObject.parseArray(r2.getString("DETAIL"), ICBCBatchDKDetail.class);
-		respVo.getBODY().setDETAIL(details);*/      //获取到list方法2
+		respVo.getBODY().setDETAIL(details); */     //获取到list方法2
+		
+		//to javaObject
+		Map responseMap = JSONObject.parseObject(responseStr);
+		ICBCBatchDKRequest request = JSONObject.parseObject(responseStr, ICBCBatchDKRequest.class);
+		ICBCBatchDKHeader header = request.getHEADER();
+		ICBCBatchDKBody body = request.getBODY();
+		List<ICBCBatchDKDetail>  DETAIL= body.getDETAIL();
 		
 		
-		
+		//List<ICBCBatchDKDetail>  DETAIL;
+		Map headMap = (Map) responseMap.get("HEADER");
+		Map bodyMap = (Map) responseMap.get("BODY");
+		List<ICBCBatchDKDetail> details = JSONObject.parseArray(bodyMap.get("DETAIL").toString(), ICBCBatchDKDetail.class);
 	}
 	
 	
 	
 	/**
-	 * 把java 转成
+	 * 使用fastjson  JSONObject.toJSONString 默认情况下不序列null值
+	 * 把java 转成 jsonstr
 	 * {
 "BODY":
 {"DETAIL":[{"RETMSG":"�ɹ�","NOTE":"","CARNO":"³B11133","ACTAMT":"1","AMOUNT":"1","RETCODE":"002","SIGNNO":"1000000000000010156","ORDERNO":"19062016750319"},
@@ -80,41 +90,45 @@ public class TestJson {
 "HEADER":{"REMARK":"","REQFLAG":"0","CORPNO":"00","TRCODE":"10001","TRDATE":"2019-06-21 19:39:50","REQNO":"ICBC-00-20190621-1"}
 }
 	 */
+	@Test
 	public void testobjecttostring(){
-		
-		
 		
 		ICBCBatchDKRequest request = new ICBCBatchDKRequest();
 		ICBCBatchDKHeader header = new ICBCBatchDKHeader();
 		ICBCBatchDKBody body = new ICBCBatchDKBody();
 		header.setREQFLAG("0");
 		header.setTRCODE("10000");
-		/*String transtimeOrder = baseservice.selectSysCurrentTime();
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date sDate = dateFormat.parse(transtimeOrder);
-		header.setTRDATE(dateFormat1.format(sDate));
-		header.setREQNO(req.getReq_no());
+		header.setTRDATE("201911191423");
+		header.setREQNO("88889999");
 		header.setCORPNO("01");
 		
-		body.setTOTALAMT(req.getTotalamt());
-		body.setTOTALNUM(req.getTotalnum());
+		body.setTOTALAMT("2");
+		body.setTOTALNUM("2");
 		List<ICBCBatchDKDetail> details = new ArrayList<ICBCBatchDKDetail>();
-		for (int i = 0; i < orderList.size(); i++) {
-			ICBCBatchDKDetail detail = new ICBCBatchDKDetail();
-			detail.setORDERNO(orderList.get(i).getOrder_id());
-			detail.setCARNO(orderList.get(i).getProduct_name());
-			detail.setAMOUNT(String.valueOf(orderList.get(i).getTotalAmount()));
-			detail.setSIGNNO(orderList.get(i).getAuth_no());
-			details.add(detail);
-		}*/
-		List<ICBCBatchDKDetail>  details = new ArrayList<ICBCBatchDKDetail>();
-//		body.setDETAIL(details);
+		
+		ICBCBatchDKDetail detail = new ICBCBatchDKDetail();
+		detail.setORDERNO("123");
+		detail.setCARNO("adfa");
+		detail.setAMOUNT("1");
+		detail.setSIGNNO("adfefe");
+		
+		
+		ICBCBatchDKDetail detail1 = new ICBCBatchDKDetail();
+//		detail1.setORDERNO("123");
+		detail1.setCARNO("adfa");
+		detail1.setAMOUNT("1");
+		detail1.setSIGNNO("adfefe");
+		
+		details.add(detail);
+		details.add(detail1);
+		
+		body.setDETAIL(details);
 		request.setHEADER(header);
 		request.setBODY(body);
-		System.out.println(JSON.toJSONString(request)); 
+		System.out.println(JSONObject.toJSONString(request)); //默认情况下序列化null
+		System.out.println(JSONObject.toJSONString(request,SerializerFeature.WriteMapNullValue)); 
 	}
+	
 	
 	
 

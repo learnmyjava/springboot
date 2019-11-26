@@ -1,9 +1,20 @@
 package com.example.SpringBoot;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
+
+
+
+import org.apache.commons.lang.StringUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +25,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alipaydaikou.until.ConvertTools;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import springBoot.Application;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 
 /**
@@ -43,9 +61,11 @@ public class Junit4Test {
 	@Test
 	public void testLog(){
 		
-		LOG.info("---------info级别日志-------------");
+	/*	LOG.info("---------info级别日志-------------");
 		LOG.warn("---------warn级别日志--------------");
-		LOG.error("----------error级别日志-----------");
+		LOG.error("----------error级别日志-----------");*/
+		Integer sInteger =1002;
+		System.out.println(sInteger.equals(0));
 	}
 	
 	
@@ -72,14 +92,33 @@ public class Junit4Test {
 	      return sdf.format(date);
 	}
 
-public static void main(String[] args) throws ParseException {
-//	String utcString =	formatUTC("20191112124312");
-//	System.out.println(parseUTC(utcString));
+public static void main(String[] args) throws ParseException, UnsupportedEncodingException, IOException {
+	/*Map map = new HashMap();
+	map.put("plateNumber", "鲁A88888");
+	map.put("refundAmount", 12);
+	map.put("refundId", "12345677");
 	
-	String string = "{dfasdf:dfsdf,dfadsfa=213r434,3253=lihonghui}";
-	System.out.println(string.substring(0,string.length()-1)+",\"sss\":"+"\""+"hello"+"\"}");
-	/*int s = (int) new Date().getTime();
-	System.out.println(s);*/
+	String data = JSONObject.fromObject(map).toString();
+	System.out.println(data);
+	
+	Map head = new HashMap();
+	head.put("appId", "SDDJKD");
+	head.put("timestamp", 1234567);
+
+	head.put("data", data);
+	System.out.println(JSONObject.fromObject(head).toString());*/
+	
+	/*TestVO vo = new TestVO();
+	vo.setAddress(null);
+	vo.setAge("12");
+	vo.setName("");
+	String strjson = JSONObject.toJSONString(vo);//默认不序列null
+	System.out.println(strjson);
+	Map map = JSONObject.parseObject(strjson);
+	System.out.println(map.get("age"));*/
+	Integer i =1234566;
+	Integer a = 1234566;
+	System.out.println(i.equals(a));
 }
 
 
