@@ -29,8 +29,8 @@ public class RedisService {
 	private static final Logger LOG = LoggerFactory.getLogger(RedisService.class);
 	@Autowired
 	private RedisTemplate redisTemplate;
-	@Autowired
-	JedisCluster jedisCluster;
+	//@Autowired
+	//JedisCluster jedisCluster;
 	/**
 	 * 写入缓存
 	 * @param key

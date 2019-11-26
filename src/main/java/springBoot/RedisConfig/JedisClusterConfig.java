@@ -19,7 +19,7 @@ import redis.clients.jedis.JedisCluster;
  */
 //@Configuration
 public class JedisClusterConfig {
-	@Autowired
+	//@Autowired
 	private RedisProperties redisProperties;
 	/**
 	 * new jedisCluster 单例 ,可以直接注入到其他类中

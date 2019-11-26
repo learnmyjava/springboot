@@ -24,13 +24,13 @@ import java.lang.reflect.Method;
  * @Version 1.0.0
  * 来源于 https://www.cnblogs.com/liliuguang/p/11052463.html
  */
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class RedisConfig {
     /*定义缓存数据 key 生成策略的bean
      *包名+类名+方法名+所有参数
      */
-    @Bean
+   // @Bean
     public KeyGenerator keyGenerator() {
         return new KeyGenerator() {
             @Override
@@ -53,7 +53,7 @@ public class RedisConfig {
 //        return cacheManager;
 //    }
     //1.项目启动时此方法先被注册成bean被spring管理
-    @Bean
+   // @Bean
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
 
         StringRedisTemplate template = new StringRedisTemplate(factory);
@@ -66,7 +66,7 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
-    @Bean
+   // @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
