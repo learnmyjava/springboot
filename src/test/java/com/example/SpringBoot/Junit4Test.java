@@ -91,35 +91,39 @@ public class Junit4Test {
 	      Date date = utcFormat.parse(utcDate);
 	      return sdf.format(date);
 	}
-
-public static void main(String[] args) throws ParseException, UnsupportedEncodingException, IOException {
-	/*Map map = new HashMap();
-	map.put("plateNumber", "鲁A88888");
-	map.put("refundAmount", 12);
-	map.put("refundId", "12345677");
 	
-	String data = JSONObject.fromObject(map).toString();
-	System.out.println(data);
+	/**
+	 * JSONObject默认不序列null
+	 */
+	@Test
+	public void testJSON() {
+		/*Map map = new HashMap();
+		map.put("plateNumber", "鲁A88888");
+		map.put("refundAmount", 12);
+		map.put("refundId", "12345677");
+		
+		String data = JSONObject.fromObject(map).toString();
+		System.out.println(data);
+		
+		Map head = new HashMap();
+		head.put("appId", "SDDJKD");
+		head.put("timestamp", 1234567);
 	
-	Map head = new HashMap();
-	head.put("appId", "SDDJKD");
-	head.put("timestamp", 1234567);
-
-	head.put("data", data);
-	System.out.println(JSONObject.fromObject(head).toString());*/
-	
-	/*TestVO vo = new TestVO();
-	vo.setAddress(null);
-	vo.setAge("12");
-	vo.setName("");
-	String strjson = JSONObject.toJSONString(vo);//默认不序列null
-	System.out.println(strjson);
-	Map map = JSONObject.parseObject(strjson);
-	System.out.println(map.get("age"));*/
-	Integer i =1234566;
-	Integer a = 1234566;
-	System.out.println(i.equals(a));
-}
+		head.put("data", data);
+		System.out.println(JSONObject.fromObject(head).toString());*/
+		
+		/*TestVO vo = new TestVO();
+		vo.setAddress(null);
+		vo.setAge("12");
+		vo.setName("");
+		String strjson = JSONObject.toJSONString(vo);//默认不序列null
+		System.out.println(strjson);
+		Map map = JSONObject.parseObject(strjson);
+		System.out.println(map.get("age"));*/
+		Integer i =1234566;
+		Integer a = 1234566;
+		System.out.println(i.equals(a));
+	}
 
 
 

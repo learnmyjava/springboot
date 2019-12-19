@@ -1,5 +1,7 @@
 package springBoot.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class IuserInfoServiceImpl implements IuserInfoService{
 		return userMapper.getUser(u);
 		
 		
+	}
+
+	@Override
+	public List<User> getUsers(User u) {
+		return userMapper.getUsers(u);
 	}
 	
 	

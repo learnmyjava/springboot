@@ -161,6 +161,8 @@
 		    <version>3.6</version>
 		</dependency>
         
+        <!-- prometheus +springboot监控 -->
+        <!-- springboot2.X 中提供了actuactor 作为采集出口集exporter ,为prometheus 暴露采集端点 -->
          <dependency>
 		        <groupId>org.springframework.boot</groupId>
 		        <artifactId>spring-boot-starter-actuator</artifactId>
@@ -170,6 +172,7 @@
 		        <groupId>io.micrometer</groupId>
 		        <artifactId>micrometer-registry-prometheus</artifactId>
 		 </dependency>
+		 
         
         
         <!-- 开启缓存 -->
@@ -189,6 +192,19 @@
 		    <artifactId>jedis</artifactId>
 		</dependency>
 		        
+		        
+		<!-- 添加Swagger2依赖 ：构建restful API文档 -->
+		
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.2.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.2.2</version>
+		</dependency>
 		</dependencies>
 
 		
