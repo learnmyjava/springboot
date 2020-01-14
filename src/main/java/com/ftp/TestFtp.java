@@ -22,7 +22,7 @@ public class TestFtp {
     	String path="F:/juhe/";//存放商户批扣文件和银行文件的本地位置
     	
     	
-    	String ftpFilePath=ftppath+"req_379901_2019-08-29_0001.txt";//ftp文件名及路径
+    	String ftpFilePath=ftppath+"req_379901_2019-08-29_0001.txt";//ftp上 文件名及路径
     	String localFilePath=path+"req_379901_2019-08-29_0001.txt";//要下载到本地的文件名及路径
     	
         FTPClientUtil ftpClient = new FTPClientUtil(ftpip,ftpport,ftpuser,ftppass);

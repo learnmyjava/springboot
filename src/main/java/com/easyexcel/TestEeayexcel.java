@@ -15,8 +15,11 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.easyexcel.TerminalTransBean;
-
-
+/**
+ * 使用eazyexcel 导出excel
+ * @author lihonghui
+ *
+ */
 public class TestEeayexcel {
 
 	@Test

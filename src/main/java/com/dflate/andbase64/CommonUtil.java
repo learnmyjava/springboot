@@ -101,10 +101,11 @@ public class CommonUtil {
 		
 		StringBuffer str = new StringBuffer();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1000; i++) {
 			str.append("16613157|20190402|20190401112737|支付宝(订单创建)|1|13201508|失败|未冲正|未撤销").append("\n");
 		}
-		System.out.println("原文:"+str.toString());
+		System.out.println("原文:");
+		System.out.println(str.toString());
 		String fileContent = CommonUtil.enCodeFileContent(str.toString(), "UTF-8");
 		System.out.println("压缩编码后:"+fileContent);
 		System.out.println("解压解码后:"+getFileContent(fileContent, "UTF-8"));
