@@ -3,7 +3,6 @@ package springBoot.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,25 +13,40 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import springBoot.Adapter.WebSecurityAdapter;
 import springBoot.entity.User;
 import springBoot.service.IuserInfoService;
 
 @Controller
+//@RestController
 public class LoginController {
 	public static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
-	@Resource
 	@Autowired
 	IuserInfoService userImpl;
 	
-	@RequestMapping("/login")
-	public String login(){
+	@RequestMapping("getstr")
+	@ResponseBody
+	public String getstr(){
+		return "hellojava";
+	}
+	@RequestMapping("/login") 
+	//跳转到指定页面时 @Controller 注解和视图解析器InternalResourceViewResolver 配合使用
+	//使用@RestController注解，视图解析器InternalResourceViewResolver会失效，无法解析html、jsp页面进而跳转到指定的页面，而是返回return的内容
+	//需要借助ModelAndView 返回页面
+	/*public String login(){
 		
 		return "login/login";
+	}*/
+	public ModelAndView Login(){
+		ModelAndView model = new ModelAndView();
+		model.setViewName("login/login");
+		return model;
 	}
 	
-	@RequestMapping("/loginVerify")
+	@RequestMapping("/loginVerify")//@Controller返回页面
 	public String loginVerify(User user,Model model,HttpSession session){
 		User u =userImpl.getUser(user);
 		
@@ -49,7 +63,6 @@ public class LoginController {
 		
 		
 	}
-	
 	@RequestMapping("/logoff")
 	public String logoff(HttpSession session){
 		session.removeAttribute(WebSecurityAdapter.SESSION_USER_KEY);

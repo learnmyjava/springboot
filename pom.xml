@@ -63,12 +63,17 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency> -->
+		
+		
 		<!--thymeleaf 模板引擎  -->
+		
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 		
+		 
+		 
 	   <dependency>
 		<groupId>net.logstash.logback</groupId>
 		<artifactId>logstash-logback-encoder</artifactId>
