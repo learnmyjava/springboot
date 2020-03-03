@@ -2,8 +2,10 @@ package springBoot.mapper;
 
 import java.util.List;
 
-import springBoot.entity.User;
+import org.springframework.stereotype.Repository;
 
+import springBoot.entity.User;
+@Repository
 public interface UserInfoMapperDao {
 
 	

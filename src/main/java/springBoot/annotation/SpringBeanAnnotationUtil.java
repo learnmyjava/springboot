@@ -3,19 +3,17 @@ package springBoot.annotation;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
+import springBoot.entity.Car;
+import springBoot.entity.Driver;
 
 /**
  * @author li_hhui
  * @date:2020年3月2日
  * @version:
- * 本类用于学习@Bean注解的使用  是一个工具类，并托管
- * 
- * @Bean注解作用相当于spring 中
- * <bean id="" class ="">
- * 在spring容器启动时就创建此类
- * 
- * 
+ * 本来获取spring容器的上下文
  */
 @Component
 public class SpringBeanAnnotationUtil implements ApplicationContextAware{
@@ -54,6 +52,26 @@ public class SpringBeanAnnotationUtil implements ApplicationContextAware{
 		return getApplicationContext().getBean(name, clazz);
 	}
 
+	
+	
+	@Bean
+	public Driver driver(){
+		Driver driver = new Driver();
+		driver.setName("tom");
+		driver.setAddress("安徽");
+		driver.setCar(car());
+		return driver;
+	}
+	
+	
+	
+	@Bean
+	public Car car(){
+		Car car = new Car();
+		car.setColor("黑色");
+		car.setPlatenumber("鲁Af2324");
+		return car;
+	}
 	
 	
 }
