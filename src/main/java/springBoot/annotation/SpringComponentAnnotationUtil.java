@@ -4,10 +4,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import springBoot.entity.Car;
 import springBoot.entity.Driver;
+import springBoot.entity.User;
 
 /**
  * @author li_hhui
@@ -16,15 +18,15 @@ import springBoot.entity.Driver;
  * 本来获取spring容器的上下文
  */
 @Component
-public class SpringBeanAnnotationUtil implements ApplicationContextAware{
+public class SpringComponentAnnotationUtil implements ApplicationContextAware{
 
 	private static ApplicationContext applicationContext;
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)
 			throws BeansException {
 		//获取上下文
-		if (SpringBeanAnnotationUtil.applicationContext == null ) {
-			SpringBeanAnnotationUtil.applicationContext = applicationContext;
+		if (SpringComponentAnnotationUtil.applicationContext == null ) {
+			SpringComponentAnnotationUtil.applicationContext = applicationContext;
 		}
 	}
 	
@@ -73,5 +75,32 @@ public class SpringBeanAnnotationUtil implements ApplicationContextAware{
 		return car;
 	}
 	
+	
+	
+	
+	@Bean
+	@Scope("prototype")//多例
+	public User createUser3(){
+		return new User();
+	}
+	
+	@Bean
+	public User createUser2(){
+		return new User();
+	}
+	
+	
+	@Bean(name="getuser")
+	public User createUser1(){
+		User user = new User(12,"lihonghui1");
+		return user;
+	}
+	
+	
+	@Bean
+	public User user(){
+		User user = new User(12,"lihonghui2222");
+		return user;
+	}
 	
 }
