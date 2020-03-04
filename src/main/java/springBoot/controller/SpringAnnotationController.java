@@ -21,7 +21,7 @@ import springBoot.entity.User;
  * @Repository => 持久层( 数据访问层 XXDao  XXXmapper)
  * 以上注解的作用都是将此类自动注册并装载入spring容器  只是根据功能细分
  * 
- * 
+ *本类 验证了springboot 自动注册创建的bean是单例 
  */
 @Controller
 public class SpringAnnotationController {
