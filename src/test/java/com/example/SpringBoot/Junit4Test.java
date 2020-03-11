@@ -14,6 +14,8 @@ import java.util.TreeMap;
 
 
 
+
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -35,16 +37,9 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 
-/**
- * 测试启动springboot
- * @Author lihh
- * @Time 2019年5月9日 上午10:01:42
- * @Version 1.0
- * Description:
- **/
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = Application.class)
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Junit4Test {
 	private static final Logger LOG = LoggerFactory.getLogger(Junit4Test.class);
 
@@ -126,5 +121,24 @@ public class Junit4Test {
 	}
 
 
+	@Test
+	public void testreflact(){
+		try {
+			Class<?> testclazz = Class.forName("com.example.SpringBoot.TestVO");
+			TestVO testVO = (TestVO) testclazz.newInstance();
+			testVO.setAddress("12");
+			System.out.println("testvo="+testVO.getAddress());
+			testVO.setName("tom");//私有的没有权限更改
+			System.out.println(testVO.getName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

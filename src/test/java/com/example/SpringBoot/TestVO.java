@@ -10,10 +10,10 @@ public class TestVO {
 	private String name;
 	private String age;
 	private String address;
-	public String getName() {
+	private String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 	public String getAge() {
