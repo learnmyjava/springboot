@@ -6,7 +6,19 @@ package com.example.SpringBoot;
  * @version:
  */
 public class Person {
+	
+	private static int a =0;
+	
 
+	static{
+		
+		System.out.println("静态代码块");
+	}
+	
+	public static void staticMehtod(){
+		a=1;
+		System.out.println("静态方法");
+	}
 	private String name;
 	private int age;
 	private String address;
@@ -47,6 +59,9 @@ public class Person {
 	private void privatemethod(){
 		System.out.println("他是私有方法");
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Person [name=" + name + ", age=" + age + ", address=" + address

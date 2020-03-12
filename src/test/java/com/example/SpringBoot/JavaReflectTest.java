@@ -24,6 +24,7 @@ import java.util.TreeMap;
 
 
 
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -163,4 +164,27 @@ public class JavaReflectTest {
 		} 
 	}
 
+	/**
+	 * java反射机制中class.forName和classloader区别
+	 * 类加载过程 表现为 加载 链接 初始化
+	 *Class.forName() 除了执行了将类.class加载到jvm中，还对类就行了解释，即执行了类的static 代码块
+	 * Classloader.getClassLoader()则不会执行static 代码块
+	 * 
+	 * 原理 由Class.forName 底层其实就是通过classloader 加载类，但是它去设置了类被加载后是否执行static代码块，默认设置成true
+	 */
+	@Test
+	public void testloader(){
+		
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		try {
+			Class<?> loadervo = classLoader.loadClass("com.example.SpringBoot.Person");
+			System.out.println("classLoader加载="+loadervo.getName());
+			System.out.println("===============");
+			Class<?> classfornamevo = Class.forName("com.example.SpringBoot.Person");
+			System.out.println(classfornamevo.getName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
