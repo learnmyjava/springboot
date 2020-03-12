@@ -1,4 +1,4 @@
-package com.example.SpringBoot;
+package com.java.reflect.learn;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -44,7 +44,6 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import springBoot.Application;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
-
 
 public class JavaReflectTest {
 	private static final Logger LOG = LoggerFactory.getLogger(JavaReflectTest.class);

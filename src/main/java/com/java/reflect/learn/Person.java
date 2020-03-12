@@ -1,4 +1,5 @@
-package com.example.SpringBoot;
+package com.java.reflect.learn;
+
 
 /**
  * @author li_hhui
@@ -25,7 +26,7 @@ public class Person {
 	private String getName() {
 		return name;
 	}
-	
+	private String tel;
 	public Person(){
 		
 	}
