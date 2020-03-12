@@ -23,6 +23,18 @@ import springBoot.entity.User;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=Application.class)
 public class SpringBootAnnotationlearnTest {
+	@Test
+	public void testLog(){
+		
+	/*	LOG.info("---------info级别日志-------------");
+		LOG.warn("---------warn级别日志--------------");
+		LOG.error("----------error级别日志-----------");*/
+		Integer sInteger =1002;
+		System.out.println(sInteger.equals(0));
+	}
+	
+	
+	
 
 	/**
 	 * @Autowired
