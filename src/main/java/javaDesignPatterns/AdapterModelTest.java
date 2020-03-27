@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHan
  * @author li_hhui
  * @date:2020年3月24日
  * @version:
- * 结构型模式：适配器设计模式
+ * 结构类模式：适配器设计模式
  * 把一个接口转换成客户端期待的另一种接口，从而使因两个接口不匹配无法一起工作的两个类一起工作，适配器的作用就是解决接口不兼容性的问题。
  * 
 * springmvc 中前端控制器dispatcher 将请求分发到具体的controller。其底层就是使用的适配器模式。

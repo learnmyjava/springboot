@@ -88,6 +88,8 @@ public class JavaReflectTest {
 	 * 
 	 * 静态编译:在编译阶段就确定类型
 	 * 动态编译:运行时确实类型 绑定对象，最大限度的发挥了java灵活性，体现了多态的应用。 降低了类之间的耦合性。
+	 * 
+	 * java 动态代理模式中 使用java反射机制生成生成代理类对象
 	 */
 	@Test
 	public void testreflact(){
