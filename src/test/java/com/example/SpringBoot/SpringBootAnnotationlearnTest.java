@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -87,7 +88,7 @@ public class SpringBootAnnotationlearnTest {
 	 * @Bean注解   由@Bean创建的类默认是单例，@Bean注解作用相当于spring 配置文件中，<bean id="" class ="">，在spring容器启动时就创建此类 
 	 * @Bean注解使用  引用注意： 实例名和方法名相等
 	 * @Component 注解 的作用同@Bean类似，自动注册bean并装配到spring容器，但是bean比component自定义性更强更灵活，可以实现一些component 实现不了的自定义加载类
-	 * Component 修饰的配置类 不会为bean 生成CGLIB代理，所以在@Bean给容器注入car实例，在driver()方法中调用car()方法时，有新建了一个实例。
+	 * Component 修饰的配置类 不会为bean 生成CGLIB代理，所以在@Bean给容器注入car实例，在driver()方法中调用car()方法时，又新建了一个实例。
 	 *  而在Configuration 中，有代理class 会对car()方法拦截，在driver()中调用car() 方法时，会遇到拦截，直接从BeanFactory中获取car实例
 	 * 
 	 */
