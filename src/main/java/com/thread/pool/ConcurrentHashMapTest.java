@@ -9,6 +9,7 @@ import java.util.Map.Entry;
  * @author li_hhui
  * @date:2020年3月31日
  * @version:
+ * HashMap 不是线程安全
  * ConcurrentHashMap 线程安全https://blog.csdn.net/hulinku/article/details/79647015
  */
 public class ConcurrentHashMapTest {

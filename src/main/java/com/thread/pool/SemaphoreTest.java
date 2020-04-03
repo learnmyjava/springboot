@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * 假设停车场有两个车位
  * 同时最多能放两辆车，其他车需要等待
  */
-public class SemaphoreDemo {
+public class SemaphoreTest {
 	
 	private static Semaphore semaphore = new Semaphore(2);
 	/**

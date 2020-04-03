@@ -15,7 +15,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @version:
  * 各类常用线程池
  */
-public class ThreadPoolUtil {
+public class ThreadPoolUtilTest {
 
 	/**
 	 * java util  newCachedThreadPool
