@@ -43,7 +43,7 @@
 		</dependency>
 		<!-- 支持全栈式web开发，包括Tomcat、spring-webmvc -->
 		
-		<!--用来热部署 -->
+		<!--用来热部署 and spring-boot-maven-plugin -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
