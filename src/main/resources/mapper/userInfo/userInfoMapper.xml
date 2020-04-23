@@ -31,6 +31,13 @@
 		</trim>
 	</select>
 	
+	<insert id="saveUser" parameterType="springBoot.entity.User">
+	
+		insert into SpringBootUser u (u.id,u.username,u.age,u.address ) values
+		
+		(#{id},#{username},#{password},#{age},#{address})
+	
+	</insert>
 	
 	
 </mapper>

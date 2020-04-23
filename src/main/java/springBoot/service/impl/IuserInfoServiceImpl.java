@@ -25,6 +25,12 @@ public class IuserInfoServiceImpl implements IuserInfoService{
 	public List<User> getUsers(User u) {
 		return userMapper.getUsers(u);
 	}
+
+	@Override
+	public int saveUser(User u) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 }

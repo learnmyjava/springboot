@@ -11,4 +11,6 @@ public interface IuserInfoService {
 
 	public User getUser (User u);
 	public List<User> getUsers(User u);
+	
+	public int saveUser(User u);
 }
