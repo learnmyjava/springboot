@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 搜索所有META-INF/spring.factories 文件并读取，此文件以类全限定名的方式 配置所有的springboot需要自动装载的类，根据全限定名来创建类并注册到容器
  * 
  * 与配置文件匹配的原理
- * 以AutoConfiguration结尾来命名的，实际上是个javaConfig 形势的spring容器配置类，此配置类通过@EnableConfigurationProperties 注解将XXXPropertiesde类加载到容器，
+ * 以AutoConfiguration结尾来命名的，实际上是个javaConfig 形式的spring容器配置类，此配置类通过@EnableConfigurationProperties 注解将XXXPropertiesde类加载到容器，
  * XXXPropertiesde 这个类又通过@ConfigurationProperties 与全局配置文件匹配。
  * 
  * 以application.properties 中修改服务端口server.port 为例

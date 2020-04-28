@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author li_hhui
  * @date:2019年12月13日
  * @version:
- * 在线发布结构API 访问地址http://ip:port/swagger-ui.html
+ * 在线发布接口API 访问地址http://ip:port/swagger-ui.html
  * 服务端结合RestFullController.java
  */
 @Configuration
