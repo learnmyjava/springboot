@@ -48,12 +48,18 @@ public class LoginController {
 	
 	@RequestMapping("/loginVerify")//@Controller返回页面
 	public String loginVerify(User user,Model model,HttpSession session){
+		if(user == null || user.getUsername()==null || user.getPassword() == null){
+			model.addAttribute("logintip", "用户名或密码错误");
+			model.addAttribute("user", user);
+			return "login/login";
+		}
 		User u =userImpl.getUser(user);
 		
 		if( null != u){
 			LOG.info("当前登录用  username="+u.getUsername());
 			session.setAttribute(WebSecurityAdapter.SESSION_USER_KEY, user);
 			model.addAttribute("user", user);
+			
 			return "login/jspsuccess";
 		}else{
 			model.addAttribute("logintip", "用户名或密码错误");

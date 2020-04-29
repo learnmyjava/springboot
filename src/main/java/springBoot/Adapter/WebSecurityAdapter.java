@@ -36,10 +36,10 @@ public class WebSecurityAdapter extends  WebMvcConfigurerAdapter{
 				  return true;
 			  }
 			  //登录权限拦截	
-//			  String url="login";
-//			  response.sendRedirect(url);
-//			  return false;
-			  return true;
+			  String url="/login";
+			  response.sendRedirect(url);
+			  return false;
+//			  return true;
 		  }
 	  }
 	  
