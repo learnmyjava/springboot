@@ -25,6 +25,7 @@ import java.util.Map;
 
 /**
  * JWT的工具类用于创建token并校验token的合法性
+ * https://www.jianshu.com/p/9f5b09b3739a
  */
 public class JWTUtil
 {
@@ -75,7 +76,8 @@ public class JWTUtil
     }
 
     /**
-     * 解析jwt(校验)
+     * 解析jwt(校验)  
+     * 令牌超时,直接运行时异常,无法做相关处理
      * @param jwt
      * @return
      */
