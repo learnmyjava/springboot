@@ -21,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 全局异常处理器
  * @author lhh
+ * 
+ * 自定义一个异常类，在自定义一个全局异常处理器，使用@RestControllerAdvice 注解标注，然后定义一个方法，
+ * 使用@ExceptionHandler 注解  将程序抛出的指定异常和自定义的异常类绑定，在try cath 中使用自定义的异常类捕获异常
  */
 @Slf4j
 @RestControllerAdvice
