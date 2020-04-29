@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import springBoot.Adapter.JwtInterceptor;
+import springBoot.JWT.util.JWTUtil;
+import springBoot.constant.Constant;
 import springBoot.entity.User;
 import springBoot.service.IuserInfoService;
-import springBoot.util.JWTUtil;
 
 @Slf4j
 @Controller
@@ -27,6 +28,8 @@ public class LoginController {
 	@Autowired
 	IuserInfoService userImpl;
 	
+	@Autowired
+	Constant c;
 	@RequestMapping("getstr")
 	@ResponseBody
 	public String getstr(){
@@ -61,14 +64,13 @@ public class LoginController {
 			//设置token
 			String token = JWTUtil.getToken(u.getId(), u.getUsername());
 			log.info("创建JWT："+token);
-			
 			u.setToken(token);
-			
-			
 			session.setAttribute(JwtInterceptor.SESSION_USER_KEY, u);
-			
 			model.addAttribute("user", u);
 			
+			
+			log.info("#############"+c.getC1()+""+c.getC2());//测试常量
+//			int i =9/0;//测试自定义异常
 			
 		
 			return "login/jspsuccess";

@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import springBoot.JWT.util.JWTUtil;
 import springBoot.entity.User;
-import springBoot.util.JWTUtil;
 
 /**
  * @author li_hhui

@@ -14,7 +14,7 @@ public class ApplicationRunerFirst implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		System.out.println("此处可以实现springboot 启动的时候运行一些 特定方法");
+		System.out.println("ApplicationRunerFirst==>此处可以实现springboot 启动的时候运行一些 特定方法");
 	}
 
 }

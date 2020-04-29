@@ -1,4 +1,4 @@
-package springBoot.util;
+package springBoot.JWT.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -9,14 +9,23 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 
 
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import springBoot.controller.LoginController;
+import springBoot.exception.ResultCode;
+import springBoot.exception.ServerException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+
+
 
 
 import java.util.Date;
@@ -25,6 +34,8 @@ import java.util.Map;
 
 /**
  * JWT的工具类用于创建token并校验token的合法性
+ * 参考博客
+ * 
  * https://www.jianshu.com/p/9f5b09b3739a
  */
 public class JWTUtil
@@ -77,15 +88,21 @@ public class JWTUtil
 
     /**
      * 解析jwt(校验)  
-     * 令牌超时,直接运行时异常,无法做相关处理
+     * 令牌超时,直接运行时异常,添加全局异常信息
      * @param jwt
      * @return
      */
-    public static Claims parseJWT(String jwt)
-    {
-        LOG.info("###解密JWT");
-        Claims claims = Jwts.parser().setSigningKey(TOKEN_SECRET).parseClaimsJws(jwt).getBody();//添加全局异常信息
-        return claims;
+    public static Claims parseJWT(String jwt){
+    	try {
+    		LOG.info("###验证JWT");
+            Claims claims = Jwts.parser().setSigningKey(TOKEN_SECRET).parseClaimsJws(jwt).getBody();
+            return claims;
+		} catch (ExpiredJwtException  e1) {
+			throw new ServerException(ResultCode.PERMISSION_TOKEN_EXPIRED);
+		}catch (Exception e) {
+			throw new ServerException(ResultCode.PERMISSION_TOKEN_INVALID);
+		}
+        
     }
 
 
