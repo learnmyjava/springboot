@@ -135,10 +135,10 @@ public class RedisService {
 	public void setObject(){
 		
 		List<User> users = new ArrayList<User>();
-		User u1 = new  User("lili","lilipass",45,"山东");
-		User u2 = new  User("tom","tompass",23,"河南");
-		User u3 = new  User("Jack","Jackpass",42,"安徽");
-		User u4 = new  User("Marray","Marraypass",45,"上海");
+		User u1 = new  User("lili","lilipass",null, 45,"山东", null);
+		User u2 = new  User("tom","tompass",null, 23,"河南", null);
+		User u3 = new  User("Jack","Jackpass",null, 42,"安徽", null);
+		User u4 = new  User("Marray","Marraypass",null, 45,"上海", null);
 		users.add(u1);
 		users.add(u2);
 		users.add(u3);
@@ -157,7 +157,7 @@ public class RedisService {
 	 */
 	public void setsingleObject(){
 		
-		User u1 = new  User("lili","lilipass",45,"山东");
+		User u1 = new  User("lili","lilipass",null, 45,"山东", null);
 		redisTemplate.opsForValue().set("user1", u1);
 		User returnUsers =  (User) redisTemplate.opsForValue().get("user1");
 		

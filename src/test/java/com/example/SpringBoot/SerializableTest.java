@@ -36,7 +36,7 @@ public class SerializableTest {
 	@Test
 	public void testSerializable(){
 		
-		User user = new User("tom", "12345678", 12, "安徽合肥");
+		User user = new User("tom", "12345678", null, 12, "安徽合肥", null);
 		
 		try {
 			FileOutputStream outputStream = new FileOutputStream("F:\\object.out");//序列化磁盘文件

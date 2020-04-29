@@ -92,14 +92,14 @@ public class SpringComponentAnnotationUtil implements ApplicationContextAware{
 	
 	@Bean(name="getuser")
 	public User createUser1(){
-		User user = new User(12,"lihonghui1");
+		User user = new User(null, null, null, 12,"lihonghui1", null);
 		return user;
 	}
 	
 	
 	@Bean
 	public User user(){
-		User user = new User(12,"lihonghui2222");
+		User user = new User(null, null, null, 12,"lihonghui2222", null);
 		return user;
 	}
 	

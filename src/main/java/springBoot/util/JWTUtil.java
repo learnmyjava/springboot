@@ -33,20 +33,20 @@ public class JWTUtil
     /**
      * 过期时间 30分钟
      */
-    private static final long EXPIRE_TIME = 30 * 60 * 1000;
+    private static final long EXPIRE_TIME = 1 * 60 * 1000;
     
     /**
      * 加密密文 秘钥
      */
     private static final String TOKEN_SECRET = "e7a5aeaac86a4d579f26b7bb1e16bd9f";
 
-    public static String getToken(String id, String userName) {
+    public static String getToken(String id, String username) {
         Date expTime = new Date( System.currentTimeMillis()+ EXPIRE_TIME);
         Date issuedAt = new Date(System.currentTimeMillis());
         return Jwts.builder()
-                .setSubject(userName)
+                .setSubject(username)
                 .setSubject(id)
-                .claim("username", userName)
+                .claim("username", username)
                 .claim("id", id)
                 .setIssuedAt(issuedAt)
                 .setExpiration(expTime)
@@ -82,14 +82,7 @@ public class JWTUtil
     public static Claims parseJWT(String jwt)
     {
         LOG.info("###解密JWT");
-        // 签名秘钥，和生成的签名的秘钥一模一样
-
-        // 得到DefaultJwtParser
-        Claims claims = Jwts.parser()
-                // 设置签名的秘钥
-                .setSigningKey(TOKEN_SECRET)
-                // 设置需要解析的jwt
-                .parseClaimsJws(jwt).getBody();
+        Claims claims = Jwts.parser().setSigningKey(TOKEN_SECRET).parseClaimsJws(jwt).getBody();//添加全局异常信息
         return claims;
     }
 

@@ -107,7 +107,7 @@ public class MethodRefTest {
 		
 		
 		//new 一个属性赋值的对象
-		Function<Integer, User> fun = (x) -> new User(x);
+		/*Function<Integer, User> fun = (x) -> new User(x);
 		User user = fun.apply(12);
 //		System.out.println(user.toString());
 		
@@ -118,7 +118,7 @@ public class MethodRefTest {
 		//new 两个属性赋值的对象
 		BiFunction<Integer, String, User> bif = (x,y) ->  new User(x,y);
 		User user2 = bif.apply(12, "lihonghui");
-		System.out.println(user2.toString());
+		System.out.println(user2.toString());*/
 		
 	}
 	

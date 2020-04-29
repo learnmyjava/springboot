@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import springBoot.Adapter.JwtInterceptor;
 import springBoot.Adapter.WebSecurityAdapter;
 import springBoot.entity.User;
 import springBoot.service.IuserInfoService;
+import springBoot.util.JWTUtil;
 
+@Slf4j
 @Controller
 //@RestController
 public class LoginController {
-	public static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 	@Autowired
 	IuserInfoService userImpl;
 	
@@ -56,10 +60,21 @@ public class LoginController {
 		User u =userImpl.getUser(user);
 		
 		if( null != u){
-			LOG.info("当前登录用  username="+u.getUsername());
-			session.setAttribute(WebSecurityAdapter.SESSION_USER_KEY, user);
-			model.addAttribute("user", user);
+			log.info("当前登录用  username="+u.getUsername());
 			
+			//设置token
+			String token = JWTUtil.getToken(u.getId(), u.getUsername());
+			log.info("创建JWT："+token);
+			
+			u.setToken(token);
+			
+			
+			session.setAttribute(JwtInterceptor.SESSION_USER_KEY, u);
+			
+			model.addAttribute("user", u);
+			
+			
+		
 			return "login/jspsuccess";
 		}else{
 			model.addAttribute("logintip", "用户名或密码错误");
@@ -71,14 +86,14 @@ public class LoginController {
 	}
 	@RequestMapping("/logoff")
 	public String logoff(HttpSession session){
-		session.removeAttribute(WebSecurityAdapter.SESSION_USER_KEY);
+		session.removeAttribute(JwtInterceptor.SESSION_USER_KEY);
 		return "login/login";
 	}
 	
 	@RequestMapping("/ajaxrequest")
 	@ResponseBody
 	public User ajaxrequest(@RequestBody User u,HttpSession session){
-		session.setAttribute(WebSecurityAdapter.SESSION_USER_KEY, u);
+		session.setAttribute(JwtInterceptor.SESSION_USER_KEY, u);
 		return u;
 	}
 	
@@ -86,27 +101,15 @@ public class LoginController {
 	@RequestMapping("/showList")
 	public String showList(Model model,HttpSession session){
 		List list=new ArrayList<>();
-		User u =(User) session.getAttribute(WebSecurityAdapter.SESSION_USER_KEY);
+		User u =(User) session.getAttribute(JwtInterceptor.SESSION_USER_KEY);
 		if(u.getUsername().equals("admin")){
-			User u1 =new User("tom","tom",12,"山东济南");
-			User u2 =new User("marry","marry",32,"安徽合肥");
-			User u3 =new User("jack","jack",25,"江苏南京");
-			User u4 =new User("roles","roles",19,"上海");
-			
-			User u5 =new User("jack","jack",25,"江苏南京");	
-			User u7 =new User("jack","jack",25,"江苏南京");	
-			User u6 =new User("roles","roles",19,"上海");
-		
+			User u1 =new User();
+			u1.setUsername("marray");
+			u1.setAddress("山东");
+			u1.setAge(12);
 			
 			
 			list.add(u1);
-			list.add(u2);
-			list.add(u3);
-			list.add(u4);
-
-			//list.add(u5);
-			list.add(u6);
-			list.add(u7);
 			
 			list.add(u);
 		}
