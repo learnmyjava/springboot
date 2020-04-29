@@ -3,6 +3,7 @@ package springBoot.Adapter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -32,4 +33,20 @@ public class WebSecurityAdapter implements  WebMvcConfigurer{
       registry.addResourceHandler("/webjars/")
           .addResourceLocations("classpath:/META-INF/resources/webjars/");
 	  }
+	  
+	  
+	  
+	  /**
+	     * 跨域支持
+	     *
+	     * @param registry
+	     */
+	    @Override
+	    public void addCorsMappings(CorsRegistry registry) {
+	        registry.addMapping("/**")
+	                .allowedOrigins("*")
+	                .allowCredentials(true)
+	                .allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS", "HEAD")
+	                .maxAge(3600 * 24);
+	    }
 }
