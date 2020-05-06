@@ -17,6 +17,7 @@ import springBoot.service.IuserInfoService;
  * @author li_hhui
  * @date:2019年12月13日
  * @version:
+ * rest风格接口
  */
 @RestController
 @RequestMapping("/users")
