@@ -18,7 +18,7 @@ import org.junit.Test;
  * bean被初始化之后的3中回调
  * java 提供的@PostConstruct
  * 实现InitializingBean接口，实现afterPropertiesSet方法
- * xml方式，bean标签里配置init-mothod属性，指向类中的方法。
+ * xml方式，bean标签里配置init-method属性，指向类中的方法。
  */
 public class TestCallBack {
 	@Test
