@@ -39,15 +39,15 @@ public class LoginController {
 	//跳转到指定页面时 @Controller 注解和视图解析器InternalResourceViewResolver 配合使用
 	//使用@RestController注解，视图解析器InternalResourceViewResolver会失效，无法解析html、jsp页面进而跳转到指定的页面，而是返回return的内容
 	//需要借助ModelAndView 返回页面
-	/*public String login(){
+	public String login(){
 		
-		return "login/login";
-	}*/
-	public ModelAndView Login(){
+		return "login";
+	}
+/*	public ModelAndView Login(){
 		ModelAndView model = new ModelAndView();
 		model.setViewName("login/login");
 		return model;
-	}
+	}*/
 	
 	@RequestMapping("/loginVerify")//@Controller返回页面
 	public String loginVerify(User user,Model model,HttpSession session){
