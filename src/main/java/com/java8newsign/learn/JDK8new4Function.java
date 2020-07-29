@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * jdk8 Lambda 需要函数型接口的支持(函数型接口-即只有一个抽象方法的接口)

@@ -1,6 +1,7 @@
 package com.ftp;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * @author li_hhui

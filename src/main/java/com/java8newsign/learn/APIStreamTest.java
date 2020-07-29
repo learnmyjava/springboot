@@ -1,10 +1,11 @@
 package com.java8newsign.learn;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.stream.LongStream;
 
-import org.junit.Test;
 
 public class APIStreamTest { 
 	

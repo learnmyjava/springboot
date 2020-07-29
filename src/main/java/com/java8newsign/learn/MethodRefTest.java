@@ -9,13 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 
-
-
-
-
-
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import springBoot.entity.User;
 
 /**

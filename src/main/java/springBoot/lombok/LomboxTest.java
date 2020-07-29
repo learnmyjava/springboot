@@ -1,6 +1,6 @@
 package springBoot.lombok;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author li_hhui

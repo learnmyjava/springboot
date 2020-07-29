@@ -1,8 +1,8 @@
 package com.sftp;
 
-import org.junit.Test;
 
 import com.jcraft.jsch.ChannelSftp;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author li_hhui

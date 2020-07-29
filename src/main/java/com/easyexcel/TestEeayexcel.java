@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
 
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.easyexcel.TerminalTransBean;
+import org.junit.jupiter.api.Test;
+
 /**
  * 使用eazyexcel 导出excel
  * @author lihonghui
