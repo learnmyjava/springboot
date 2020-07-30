@@ -253,7 +253,9 @@ public class HttpsRequestImpl  {
 		httpPost.setConfig(requestConfig);
 		try {
 			LOG.info("请求数据："+jsonObject);
-			httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
+			httpPost.addHeader("Content-Type", "application/json");
+
+//			httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
 			/*XlDesTools des = new XlDesTools(AppCode.XL_ETC_KEY);
 		    String encryptString = "message="+des.encrypt(jsonObject);
 		    LOG.info("请求加密数据："+encryptString);

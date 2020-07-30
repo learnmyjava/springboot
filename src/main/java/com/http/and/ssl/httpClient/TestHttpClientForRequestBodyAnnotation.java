@@ -1,42 +1,37 @@
-package test;
+package com.http.and.ssl.httpClient;
 
+
+import com.alibaba.fastjson.JSON;
+import com.http.and.ssl.HttpsRequestImpl;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import java.util.*;
 
 
 /**
+ * Content-Type application/json 编码类型。json格式的请求参数通过HttpEntity设置到请求体中，后台使用@RequestBody 接收，spring解析器可将json转化为实体类。GET请求中没有entity,故@RequesBody不知道get请求
  * @author li_hhui
  * @date:2019年7月14日
  * @version:
  */
-public class TestHttpClient {
+public class TestHttpClientForRequestBodyAnnotation {
 
 
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		String url ="http://localhost:80/lr/impl/create";
         ColumnInfo c1 = new ColumnInfo();
         c1.setColumnName("username");
@@ -63,30 +58,24 @@ public class TestHttpClient {
         c3.setIsNotNull(true);
         c3.setIsIncrement(false);
         List<ColumnInfo> columnInfoList = new ArrayList<>();
+		columnInfoList.add(c1);
+		columnInfoList.add(c2);
+		columnInfoList.add(c3);
+
         RequestEntity r = new RequestEntity();
         r.setColumns(columnInfoList);
-        r.setTableName("T_USER");
+        r.setTableName("T");
         r.setTableComment("用户表");
 
+		HttpsRequestImpl http = new HttpsRequestImpl();
+		http.sendPostEtc(url,JSON.toJSONString(r));
 
         try {
-			/*String sign=getSign(request, "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRMzy5YPdTej7UKKAKiV5X02A4nmIwH8oNUKfxHbgnem97s99Xm0zRVq34dhNZY8NF4XIsU+BvC8C6a5SlAQEeEB+u8YA7rByGGk4pIanM8UyppT/ZwBpRzlwbpmc377kYLoOpr/wUTXHCw++GQz1qJg0FsDzl820cv4f04al03QIDAQAB");
-			System.out.println("sign:"+sign);*/
-			
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("tableName", "T_USER"));
-			params.add(new BasicNameValuePair("tableComment", "用户表"));
-//			params.add(new BasicNameValuePair("columns",columnInfoList ));
-
-			UrlEncodedFormEntity entity = null;
-			try {
-				entity = new UrlEncodedFormEntity(params, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			httpPost.setEntity(entity);
+			httpPost.addHeader("Content-Type", "application/json");
+			StringEntity post = new StringEntity(JSON.toJSONString(r),"UTF-8");
+			httpPost.setEntity(post);
 			String response = "";
 			try {
 				HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -107,6 +96,7 @@ public class TestHttpClient {
 		
 
 	}
+
 
 /*	private static String getSign(CMBWithHoldConsumeRequest req, String string) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, IntrospectionException {
 		

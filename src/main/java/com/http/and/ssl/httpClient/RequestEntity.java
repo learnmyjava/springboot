@@ -1,4 +1,4 @@
-package test;
+package com.http.and.ssl.httpClient;
 
 import org.hibernate.validator.constraints.Length;
 
