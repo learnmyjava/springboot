@@ -258,15 +258,51 @@
         
 		</dependencies>
 
-		
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</pluginRepository>
+	</pluginRepositories>
         
 	<build>	
 		
-	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.core-lib</groupId>
+				<artifactId>xjar-maven-plugin</artifactId>
+				<version>4.0.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<password>cecgw@123</password>
+							<!-- 源jar所在目录 -->
+							<sourceDir>${project.build.directory}</sourceDir>
+							<!-- 源jar名称 -->
+							<sourceJar>dap-console.jar</sourceJar>
+							<!-- 目标jar存放目录 -->
+							<targetDir>${project.build.outputDirectory}</targetDir>
+							<!-- 目标jar名称 -->
+							<targetJar>console.jar</targetJar>
+							<!--<excludes>
+                                <exclude>/META-INF/resources/**/*</exclude>
+                                <exclude>/assets/**/*</exclude>
+                                <exclude>/images/**/*</exclude>
+                                <exclude>/pages/**/*</exclude>
+                                <exclude>/static/**/*</exclude>
+                            </excludes>-->
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

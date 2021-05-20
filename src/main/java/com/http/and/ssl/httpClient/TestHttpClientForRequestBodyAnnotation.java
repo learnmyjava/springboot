@@ -33,39 +33,39 @@ public class TestHttpClientForRequestBodyAnnotation {
 
 	public static void main(String[] args) throws Exception {
 		String url ="http://localhost:80/lr/impl/create";
-        ColumnInfo c1 = new ColumnInfo();
-        c1.setColumnName("username");
-        c1.setColumnComment("姓名");
-        c1.setColumnType("varchar");
-        c1.setIsPrimaryKey(false);
-        c1.setIsNotNull(true);
-        c1.setIsIncrement(false);
+		ColumnInfo c1 = new ColumnInfo();
+		c1.setColumnName("username");
+		c1.setColumnComment("姓名");
+		c1.setColumnType("varchar");
+		c1.setIsPrimaryKey(false);
+		c1.setIsNotNull(true);
+		c1.setIsIncrement(false);
 
-        ColumnInfo c2 = new ColumnInfo();
-        c2.setColumnName("id");
-        c2.setColumnComment("id");
-        c2.setColumnType("number");
-        c2.setIsPrimaryKey(true);
-        c2.setIsNotNull(true);
-        c2.setIsIncrement(false);
+		ColumnInfo c2 = new ColumnInfo();
+		c2.setColumnName("id");
+		c2.setColumnComment("id");
+		c2.setColumnType("number");
+		c2.setIsPrimaryKey(true);
+		c2.setIsNotNull(true);
+		c2.setIsIncrement(false);
 
 
-        ColumnInfo c3 = new ColumnInfo();
-        c3.setColumnName("age");
-        c3.setColumnComment("age");
-        c3.setColumnType("number");
-        c3.setIsPrimaryKey(false);
-        c3.setIsNotNull(true);
-        c3.setIsIncrement(false);
-        List<ColumnInfo> columnInfoList = new ArrayList<>();
+		ColumnInfo c3 = new ColumnInfo();
+		c3.setColumnName("age");
+		c3.setColumnComment("age");
+		c3.setColumnType("number");
+		c3.setIsPrimaryKey(false);
+		c3.setIsNotNull(true);
+		c3.setIsIncrement(false);
+		List<ColumnInfo> columnInfoList = new ArrayList<>();
 		columnInfoList.add(c1);
 		columnInfoList.add(c2);
 		columnInfoList.add(c3);
 
-        RequestEntity r = new RequestEntity();
-        r.setColumns(columnInfoList);
-        r.setTableName("T");
-        r.setTableComment("用户表");
+		RequestEntity r = new RequestEntity();
+		r.setColumns(columnInfoList);
+		r.setTableName("T");
+		r.setTableComment("用户表");
 
 		HttpsRequestImpl http = new HttpsRequestImpl();
 		http.sendPostEtc(url,JSON.toJSONString(r));
